@@ -1,0 +1,332 @@
+@import "tailwindcss";
+
+/* ============================================================
+   THEME VARIABLES
+   Two themes: "eggshell" (light, cream almanac paper) and
+   "brooder" (dark, heat-lamp glow). The flash-prevention script
+   in layout.tsx sets data-theme before React hydrates.
+   ============================================================ */
+
+:root,
+[data-theme="eggshell"] {
+  --c-page: #faf5ea;
+  --c-panel: #f1e7d3;
+  --c-brand: #b4502c;
+  --c-brand-fg: #fdf8ee;
+  --c-accent: #e5a02f;
+  --c-accent-fg: #2a2314;
+  --c-link: #a2482a;
+  --c-ink: #2f2b23;
+  --c-ink-2: #6d6454;
+  --c-title: #1f3527;
+  --c-rail: #1f3527;
+  --c-rail-fg: #f3ecdc;
+  --c-line: #ddcfb4;
+  --c-input-bg: #fffdf7;
+  --c-grain: 0.05;
+}
+
+[data-theme="brooder"] {
+  --c-page: #171410;
+  --c-panel: #211d17;
+  --c-brand: #d9713f;
+  --c-brand-fg: #17120c;
+  --c-accent: #f0b44b;
+  --c-accent-fg: #1b1509;
+  --c-link: #e8905c;
+  --c-ink: #e6dcc9;
+  --c-ink-2: #a8997f;
+  --c-title: #f2e7d1;
+  --c-rail: #100e0b;
+  --c-rail-fg: #f0e6d2;
+  --c-line: #3a3228;
+  --c-input-bg: #1c1913;
+  --c-grain: 0.09;
+}
+
+:root {
+  --font-display: var(--font-newsreader, "Newsreader"), Georgia, serif;
+  --font-body: var(--font-karla, "Karla"), system-ui, sans-serif;
+  --font-mono: var(--font-space-mono, "Space Mono"), ui-monospace, monospace;
+  /* Squared-off corners — this is a working farm, not a toy store. */
+  --r-card: 0.5rem;
+  --r-btn: 0.375rem;
+}
+
+/* ============================================================
+   TAILWIND v4 THEME TOKENS — bg-page, text-ink, bg-brand, …
+   ============================================================ */
+@theme inline {
+  --color-page: var(--c-page);
+  --color-panel: var(--c-panel);
+  --color-brand: var(--c-brand);
+  --color-brand-fg: var(--c-brand-fg);
+  --color-accent: var(--c-accent);
+  --color-accent-fg: var(--c-accent-fg);
+  --color-link: var(--c-link);
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-title: var(--c-title);
+  --color-rail: var(--c-rail);
+  --color-rail-fg: var(--c-rail-fg);
+  --color-line: var(--c-line);
+  --color-input-bg: var(--c-input-bg);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--c-page);
+  color: var(--c-ink);
+  line-height: 1.65;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Paper grain — a fixed noise wash over the whole page so flat color fields
+   read as printed stock rather than screen fill. Pointer-events off. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--c-grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--c-title);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+a {
+  color: var(--c-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+nav,
+footer,
+section,
+article {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background: var(--c-accent);
+  color: var(--c-accent-fg);
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+.rounded-card {
+  border-radius: var(--r-card);
+}
+
+.rounded-btn {
+  border-radius: var(--r-btn);
+}
+
+/* Small mono label — used for eyebrows, prices, and incubation day counts.
+   The typographic signature of the site. */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.input-base {
+  background-color: var(--c-input-bg);
+  border: 1.5px solid var(--c-line);
+  border-radius: var(--r-btn);
+  color: var(--c-ink);
+  padding: 0.7rem 0.9rem;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+}
+
+.input-base:focus {
+  border-color: var(--c-brand);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-brand) 25%, transparent);
+}
+
+/* Panel card with a printed-edge shadow rather than a soft glow. */
+.shadow-soft {
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--c-title) 8%, transparent),
+    0 6px 20px color-mix(in srgb, var(--c-title) 7%, transparent);
+}
+
+.shadow-soft-lg {
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--c-title) 10%, transparent),
+    0 16px 40px color-mix(in srgb, var(--c-title) 10%, transparent);
+}
+
+.rail-bg {
+  background-color: var(--c-rail);
+  color: var(--c-rail-fg);
+}
+
+.rail-bg h1,
+.rail-bg h2,
+.rail-bg h3,
+.rail-bg p,
+.rail-bg a {
+  color: var(--c-rail-fg);
+}
+
+.brand-band {
+  background-color: var(--c-brand);
+  color: var(--c-brand-fg);
+}
+
+.brand-band h1,
+.brand-band h2,
+.brand-band h3,
+.brand-band p {
+  color: var(--c-brand-fg);
+}
+
+.section-band {
+  background-color: var(--c-accent);
+  color: var(--c-accent-fg);
+}
+
+.section-band h1,
+.section-band h2,
+.section-band h3,
+.section-band p {
+  color: var(--c-accent-fg);
+}
+
+/* Faint horizontal rule row of dashes — a seed-catalog divider. */
+.rule-dash {
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--c-line) 0 8px,
+    transparent 8px 14px
+  );
+}
+
+/* Wire-mesh / hardware-cloth texture for hero overlays and bands. */
+.mesh {
+  background-image: linear-gradient(
+      color-mix(in srgb, var(--c-rail-fg) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--c-rail-fg) 7%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 22px 22px;
+}
+
+/* Hero photo scrim: weighted to the bottom, where the display type sits, so
+   the top of the photograph stays bright and legible as an image. */
+.hero-scrim {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, #14100b 12%, transparent) 0%,
+    color-mix(in srgb, #14100b 22%, transparent) 40%,
+    color-mix(in srgb, #14100b 62%, transparent) 75%,
+    color-mix(in srgb, #14100b 88%, transparent) 100%
+  );
+}
+
+/* Second, horizontal scrim under the text column only. Keeps headline contrast
+   high on the left while the right side of the photograph stays open. */
+.hero-scrim-left {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, #14100b 68%, transparent) 0%,
+    color-mix(in srgb, #14100b 44%, transparent) 42%,
+    transparent 80%
+  );
+}
+
+/* Hero copy sits on photography, so it carries its own shadow. */
+.hero-type {
+  text-shadow: 0 1px 2px rgba(12, 9, 5, 0.45), 0 6px 24px rgba(12, 9, 5, 0.35);
+}
+
+/* Hero eyebrow sits high, where the scrim is deliberately weakest, so it gets
+   its own backing plate instead of relying on the gradient. */
+.hero-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--r-btn);
+  background: rgba(16, 13, 8, 0.68);
+  border: 1px solid rgba(253, 250, 242, 0.18);
+}
+
+.pill-soft-accent {
+  background-color: color-mix(in srgb, var(--c-accent) 24%, var(--c-page));
+  color: color-mix(in srgb, var(--c-accent-fg) 75%, var(--c-ink));
+}
+
+.pill-soft-brand {
+  background-color: color-mix(in srgb, var(--c-brand) 16%, var(--c-page));
+  color: var(--c-brand);
+}
+
+/* Staggered reveal on the home hero. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise-in 0.7s cubic-bezier(0.22, 0.75, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
