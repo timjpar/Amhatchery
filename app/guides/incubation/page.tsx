@@ -13,6 +13,7 @@ import {
 } from "@/app/_data/incubation";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guides/incubation" },
   title: "Incubation Guide — Setting Eggs Through Hatch Day",
   description:
     "How we incubate chicken, duck, and quail eggs: 99.5°F, humidity by species, turning schedules, candling milestones, lockdown days, and what to do (and not do) on hatch day.",

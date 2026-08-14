@@ -8,6 +8,7 @@ import { PayPalHostedDeposit } from "@/app/_components/payment/PayPalHostedDepos
 import { LINKS } from "@/app/_config/links";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/reserve" },
   title: "Reserve Chicks, Ducklings, Quail & Hatching Eggs",
   description:
     "Reserve birds from AM Hatchery in Newport, TN with a partial deposit — chicks, ducklings, quail, or hatching eggs. Pay by PayPal, Venmo, card, Cash App, or cash at pickup.",

@@ -44,14 +44,29 @@ headline numbers; individual birds can override.
 **Refresh the availability gallery** — nothing to do. `/available` re-scrapes
 the Flickr albums every 10 minutes, so new photos appear without a redeploy.
 
-## Two things to wire up before launch
+## Turning on contact-form email
 
-1. **The contact form doesn't email anyone yet.** `app/_actions/contact.ts`
-   validates the submission and logs it to the server console. Connect it to a
-   mail provider (Resend, SendGrid, or a Formspree-style endpoint) so inquiries
-   reach the inbox in `links.ts`.
-2. **`SITE_URL` is a placeholder** (`https://amhatchery.com`). Set the real
-   domain in `app/_config/business.ts`.
+The form is wired to email inquiries to `LINKS.email` (`amrabbitstn@gmail.com`)
+through Resend — see `app/_lib/mail.ts`. It needs one env var to start sending.
+Until that's set the form still works: submissions are logged to the runtime
+console instead, so nothing is lost, and no code change is needed to switch it
+on.
+
+1. Create a Resend account and verify `amhatchery.com` as a sending domain.
+   Resend gives you DNS records; add them with
+   `npx vercel dns add amhatchery.com <name> <type> <value>` (the domain's
+   nameservers already point at Vercel).
+2. Add the API key to the project — paste it in the Vercel dashboard under
+   Settings → Environment Variables, or run `npx vercel env add RESEND_API_KEY`.
+3. Redeploy.
+
+Optional overrides: `CONTACT_TO_EMAIL` changes the recipient, `MAIL_FROM`
+changes the from address (it must be on the verified domain).
+
+The domain is live: `amhatchery.com` is registered through Vercel and connected
+to the `amhatchery` project, with `www` 308-redirecting to the apex. `SITE_URL`
+in `app/_config/business.ts` is the real domain — sitemap, robots, canonical
+URLs, and JSON-LD all read from it.
 
 Deposits already work — the PayPal hosted button in `app/_config/paypal.ts` is
 the same one the rabbitry uses, so payments land in the existing account. Swap

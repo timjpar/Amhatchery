@@ -10,6 +10,7 @@ import { birdListSchema } from "@/app/_lib/schema";
 import { quail, PRICING } from "@/app/_data/flock";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/quail" },
   title: "Coturnix Quail & Quail Chicks for Sale in East Tennessee",
   description:
     "Coturnix and Jumbo Coturnix quail from AM Hatchery in Newport, TN. Chicks $5, grown birds $15, hatching eggs from $10. Laying in six weeks — the fastest way onto your own eggs.",

@@ -8,6 +8,7 @@ import { faqPageSchema, breadcrumbSchema } from "@/app/_lib/schema";
 import { faqs } from "@/app/_data/faq";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guides/faq" },
   title: "Hatchery FAQ — Shipping, Hatch Rates, Sexing & Deposits",
   description:
     "Straight answers about buying hatching eggs and chicks from AM Hatchery in Newport, TN — why we don't ship, what we guarantee, straight-run chicks, vaccination, deposits, and farm visits.",

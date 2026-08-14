@@ -8,6 +8,7 @@ import { eggTypes, chickens, ducks, quail } from "@/app/_data/flock";
 import { incubationSpecs } from "@/app/_data/incubation";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/hatching-eggs" },
   title: "Hatching Eggs & Farm-Fresh Eating Eggs in East Tennessee",
   description:
     "Fertile hatching eggs from $10 a dozen and farm-fresh eating eggs from AM Hatchery in Newport, TN — chicken, duck, and quail. Never washed, never shipped, collected within seven days.",

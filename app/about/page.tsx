@@ -9,6 +9,7 @@ import { LINKS } from "@/app/_config/links";
 import { AREAS_SERVED } from "@/app/_config/business";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About the Hatchery — A Family Farm in Newport, Tennessee",
   description:
     "AM Hatchery is a small family hatchery on a Smoky Mountain homestead in Newport, Tennessee — hatching chicks, ducklings, and quail in batches small enough to keep an eye on.",

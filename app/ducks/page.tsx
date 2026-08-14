@@ -9,6 +9,7 @@ import { birdListSchema } from "@/app/_lib/schema";
 import { ducks, PRICING } from "@/app/_data/flock";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/ducks" },
   title: "Ducks & Ducklings for Sale in East Tennessee",
   description:
     "Muscovy and Call ducklings from AM Hatchery in Newport, TN. Ducklings from $5, grown birds $30–$50, plus duck hatching eggs. Local pickup across East Tennessee.",

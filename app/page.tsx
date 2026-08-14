@@ -10,6 +10,7 @@ import { incubationSpecs, INCUBATION_TEMP } from "@/app/_data/incubation";
 import { LINKS } from "@/app/_config/links";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   title: {
     absolute:
       "Hatching Eggs, Chicks, Ducklings & Quail in East Tennessee | AM Hatchery",

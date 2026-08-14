@@ -8,6 +8,7 @@ import { LINKS } from "@/app/_config/links";
 import { getAlbumPhotos } from "@/app/_lib/flickr";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/available" },
   title: "Available Now — Chicks, Ducklings, Quail & Eggs",
   description:
     "See what's available at AM Hatchery in Newport, TN right now — hatching eggs, chicks, ducklings, and quail. Photo galleries updated as each hatch comes off the incubator.",

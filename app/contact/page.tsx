@@ -7,6 +7,7 @@ import { LINKS } from "@/app/_config/links";
 import { BUSINESS } from "@/app/_config/business";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact AM Hatchery — Newport, Tennessee",
   description:
     "Call or text Michael at 423-540-6566, email amrabbitstn@gmail.com, or send a message to ask about hatching eggs, chicks, ducklings, and quail in Newport, TN. Visits by appointment.",

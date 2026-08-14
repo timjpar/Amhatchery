@@ -7,9 +7,10 @@ import { LINKS } from "@/app/_config/links";
  * and the contact page. Keep this consistent with the Google Business Profile
  * listing — NAP consistency across the web is a local-SEO ranking signal.
  *
- * NOTE: SITE_URL is the domain this site will be deployed to. Update it here
- * (and nowhere else) once the domain is registered — sitemap, robots, canonical
- * URLs, and JSON-LD all read from it.
+ * NOTE: SITE_URL is the live domain, registered through Vercel and connected to
+ * the `amhatchery` project (`www` 308-redirects to the apex). It is the single
+ * place to change the domain — sitemap, robots, canonical URLs, and JSON-LD all
+ * read from it.
  */
 
 export const SITE_URL = "https://amhatchery.com";

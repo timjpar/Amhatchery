@@ -7,6 +7,7 @@ import { Button } from "@/app/_components/ui/Button";
 import { LINKS } from "@/app/_config/links";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/farm-shop" },
   title: "Farm Shop — Produce, Eggs & Flowers at Firstfruits Farmstead",
   description:
     "While you're picking up birds, stop by the Firstfruits Farmstead farm shop in Newport, TN for seasonal produce, farm-fresh eggs, cut flower bouquets, and composted rabbit fertilizer.",

@@ -8,6 +8,7 @@ import { howToSchema, breadcrumbSchema } from "@/app/_lib/schema";
 import { broodingSteps } from "@/app/_data/incubation";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guides/brooding" },
   title: "Brooding Guide — Chick, Duckling & Quail Care",
   description:
     "Set up a brooder and get chicks, ducklings, and quail through their first six weeks: temperatures week by week, bedding, feed and niacin, water safety, and moving out to the coop.",
