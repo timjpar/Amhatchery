@@ -3,17 +3,8 @@
 import { useState } from "react";
 import { submitContact } from "@/app/_actions/contact";
 import { LINKS } from "@/app/_config/links";
+import { INTERESTS, FIELD_LIMITS } from "@/app/_config/contact";
 import { EggMark } from "@/app/_components/ui/decorations/EggMark";
-
-const INTERESTS = [
-  "Hatching eggs",
-  "Chicks",
-  "Ducklings",
-  "Quail",
-  "Grown birds",
-  "Eating eggs",
-  "Something else",
-];
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -68,16 +59,16 @@ export function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Name" required>
-          <input name="name" type="text" required autoComplete="name" className="input-base" placeholder="Your name" />
+          <input name="name" type="text" required maxLength={FIELD_LIMITS.name} autoComplete="name" className="input-base" placeholder="Your name" />
         </Field>
         <Field label="Email" required>
-          <input name="email" type="email" required autoComplete="email" className="input-base" placeholder="you@email.com" />
+          <input name="email" type="email" required maxLength={FIELD_LIMITS.email} autoComplete="email" className="input-base" placeholder="you@email.com" />
         </Field>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Phone" hint="optional — fastest way to reach you">
-          <input name="phone" type="tel" autoComplete="tel" className="input-base" placeholder="423-555-0100" />
+          <input name="phone" type="tel" maxLength={FIELD_LIMITS.phone} autoComplete="tel" className="input-base" placeholder="423-555-0100" />
         </Field>
         <Field label="What are you after?">
           <select name="interest" className="input-base" defaultValue={INTERESTS[0]}>
@@ -95,6 +86,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
+          maxLength={FIELD_LIMITS.message}
           className="input-base resize-y"
           placeholder="How many birds are you looking for, and roughly when?"
         />

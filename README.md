@@ -27,7 +27,7 @@ Then open http://localhost:3000. `npm run build` for a production build,
 | `app/_data/faq.ts` | FAQ questions and answers. |
 | `app/_components/` | Shared UI. `PageHero`, `SectionHeader`, `BirdCard`, `CTABanner`, `ContactLine` cover most page structure. |
 | `app/_lib/schema.ts` | JSON-LD builders (LocalBusiness, ItemList, FAQPage, HowTo, BreadcrumbList). |
-| `app/_lib/flickr.ts` | Scrapes public Flickr albums for the /available gallery. 10-minute ISR. |
+| `app/_lib/flickr.ts` | Scrapes public Flickr albums for the /available gallery. Hourly ISR. |
 
 ## Routine edits
 
@@ -42,7 +42,7 @@ headline numbers; individual birds can override.
 **Update the notice bar** — `app/_components/AnnouncementBanner.tsx`.
 
 **Refresh the availability gallery** — nothing to do. `/available` re-scrapes
-the Flickr albums every 10 minutes, so new photos appear without a redeploy.
+the Flickr albums hourly, so new photos appear without a redeploy.
 
 ## Turning on contact-form email
 
@@ -71,6 +71,22 @@ URLs, and JSON-LD all read from it.
 Deposits already work — the PayPal hosted button in `app/_config/paypal.ts` is
 the same one the rabbitry uses, so payments land in the existing account. Swap
 both values there to point them somewhere else.
+
+## Images
+
+Photos in `public/images/` are capped at 2048px on the long edge and re-encoded
+at quality 82 — the source only needs to feed the largest `deviceSizes` entry
+(1920). Drop new photos in at any size and re-run the same treatment; a 10MB
+phone photo costs Vercel bandwidth and optimizer time for no visible gain.
+
+`next.config.ts` serves optimized images as AVIF only (not AVIF + WebP — Next
+caches each format separately, so listing both doubles billed transformations),
+across four device widths, cached for 30 days.
+
+**Replacing a photo requires a new filename.** Optimized variants are cached for
+30 days with no invalidation mechanism, and `/images/*` is sent to browsers with
+`max-age=2592000`. Reusing a filename means returning visitors can keep seeing
+the old photo for up to a month.
 
 ## Theming
 

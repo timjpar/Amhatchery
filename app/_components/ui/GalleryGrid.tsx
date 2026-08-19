@@ -171,7 +171,6 @@ function Lightbox({
             src={img.src}
             alt={img.alt}
             fill
-            priority
             className="object-contain select-none"
             sizes="100vw"
           />

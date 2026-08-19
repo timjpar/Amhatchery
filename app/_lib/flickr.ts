@@ -11,7 +11,9 @@ const PHOTO_URL_RE =
 
 /**
  * Fetches a public Flickr album and returns its photos in album order.
- * Revalidates every 10 min so new hatches appear without a redeploy. Returns an
+ * Revalidates hourly so new hatches appear without a redeploy. (Each refresh
+ * refetches four full album HTML pages, so a shorter window costs real egress
+ * for photos that change a few times a week at most.) Returns an
  * empty array on any failure (network, markup change) so callers can show a
  * fallback link to the album itself.
  */
@@ -27,7 +29,7 @@ export async function getAlbumPhotos(
         "User-Agent":
           "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
       },
-      next: { revalidate: 600 },
+      next: { revalidate: 3600 },
     });
     if (!res.ok) return [];
 
