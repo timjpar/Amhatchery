@@ -44,24 +44,30 @@ headline numbers; individual birds can override.
 **Refresh the availability gallery** — nothing to do. `/available` re-scrapes
 the Flickr albums hourly, so new photos appear without a redeploy.
 
-## Turning on contact-form email
+## Contact form
 
-The form is wired to email inquiries to `LINKS.email` (`amrabbitstn@gmail.com`)
-through Resend — see `app/_lib/mail.ts`. It needs one env var to start sending.
-Until that's set the form still works: submissions are logged to the runtime
-console instead, so nothing is lost, and no code change is needed to switch it
-on.
+The form posts straight from the visitor's browser to
+[FormSubmit](https://formsubmit.co), which emails the submission to
+`LINKS.email` (`amrabbitstn@gmail.com`). See `app/_lib/submitForm.ts`. There is
+no API key, no environment variable, and no Server Action behind it — the same
+setup amrabbits.com uses.
 
-1. Create a Resend account and verify `amhatchery.com` as a sending domain.
-   Resend gives you DNS records; add them with
-   `npx vercel dns add amhatchery.com <name> <type> <value>` (the domain's
-   nameservers already point at Vercel).
-2. Add the API key to the project — paste it in the Vercel dashboard under
-   Settings → Environment Variables, or run `npx vercel env add RESEND_API_KEY`.
-3. Redeploy.
+It posts from the browser rather than the server on purpose: FormSubmit answers
+HTTP 403 to requests originating from cloud infrastructure, so a POST from a
+Vercel function fails in production while the identical call from a laptop
+succeeds.
 
-Optional overrides: `CONTACT_TO_EMAIL` changes the recipient, `MAIL_FROM`
-changes the from address (it must be on the verified domain).
+**Activation is scoped to recipient + origin.** The first submission from a new
+origin makes FormSubmit email `amrabbitstn@gmail.com` a confirmation link;
+until someone clicks it, submissions from that origin are not delivered.
+amrabbits.com is already activated, but amhatchery.com needs its own. This is
+also why the form cannot be exercised from `localhost` — test it on the
+deployed site.
+
+Spam handling is the hidden honeypot in the form plus FormSubmit's own
+filtering. There is deliberately no rate limiter: it could only run
+server-side, and the endpoint is reachable without going through this site at
+all.
 
 The domain is live: `amhatchery.com` is registered through Vercel and connected
 to the `amhatchery` project, with `www` 308-redirecting to the apex. `SITE_URL`

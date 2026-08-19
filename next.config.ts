@@ -26,7 +26,10 @@ const csp = [
   "img-src 'self' data: blob: https://live.staticflickr.com https://www.paypalobjects.com https://t.paypal.com",
   // next/font/google self-hosts at build time, so no font origin is needed.
   "font-src 'self' data:",
-  "connect-src 'self' https://www.paypal.com https://www.sandbox.paypal.com https://api-m.paypal.com",
+  // formsubmit.co receives the contact submission, which posts from the
+  // browser rather than the server — FormSubmit answers 403 to requests from
+  // cloud infrastructure.
+  "connect-src 'self' https://formsubmit.co https://www.paypal.com https://www.sandbox.paypal.com https://api-m.paypal.com",
   "frame-src https://www.paypal.com https://www.sandbox.paypal.com",
   "frame-ancestors 'self'",
   "form-action 'self'",

@@ -1,9 +1,10 @@
 /**
- * Contact-form contract shared by the client form and the Server Action.
+ * Contact-form contract.
  *
- * Both sides import from here so the `<select>` options and the server-side
- * allowlist can't drift apart — the action rejects anything not in `INTERESTS`,
- * because that value is interpolated into the outgoing email subject line.
+ * The form posts straight from the visitor's browser to FormSubmit
+ * (app/_lib/submitForm.ts), so there is no server-side counterpart to keep in
+ * sync any more — these values drive the rendered `<select>` and the `maxLength`
+ * on each input.
  */
 
 export const INTERESTS = [
@@ -16,16 +17,10 @@ export const INTERESTS = [
   "Something else",
 ] as const;
 
-export type Interest = (typeof INTERESTS)[number];
-
-export function isInterest(value: string): value is Interest {
-  return (INTERESTS as readonly string[]).includes(value);
-}
-
 /**
- * Maximum accepted length per field. Enforced server-side before any other
- * work: without these, a multi-megabyte `message` is parsed, held in memory,
- * and forwarded to Resend on every request.
+ * Maximum accepted length per field, applied as `maxLength` on the inputs.
+ * These are a UX guard, not a security control: the FormSubmit endpoint is
+ * reachable without this site, so `submitForm` keeps its own backstop cap.
  */
 export const FIELD_LIMITS = {
   name: 100,
@@ -33,10 +28,4 @@ export const FIELD_LIMITS = {
   phone: 40,
   interest: 50,
   message: 5000,
-} as const;
-
-/** Submissions allowed per IP per window. */
-export const RATE_LIMIT = {
-  max: 3,
-  windowMs: 10 * 60 * 1000,
 } as const;

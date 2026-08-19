@@ -1,25 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { submitContact } from "@/app/_actions/contact";
+import { submitForm } from "@/app/_lib/submitForm";
 import { LINKS } from "@/app/_config/links";
 import { INTERESTS, FIELD_LIMITS } from "@/app/_config/contact";
+import { FormErrorNotice } from "@/app/_components/forms/FormErrorNotice";
 import { EggMark } from "@/app/_components/ui/decorations/EggMark";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [showFallback, setShowFallback] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("loading");
     const fd = new FormData(e.currentTarget);
-    const result = await submitContact({
-      name: fd.get("name") as string,
-      email: fd.get("email") as string,
-      phone: fd.get("phone") as string,
-      interest: fd.get("interest") as string,
-      message: fd.get("message") as string,
+    const read = (key: string) => ((fd.get(key) as string) ?? "").trim();
+    const email = read("email");
+    const interest = read("interest") || INTERESTS[0];
+    const result = await submitForm({
+      subject: `Hatchery inquiry \u2014 ${read("name")} (${interest})`,
+      fields: [
+        ["Name", read("name")],
+        ["Email", email],
+        ["Phone", read("phone") || "\u2014"],
+        ["Interested in", interest],
+        ["Message", read("message")],
+      ],
+      replyTo: email,
       honeypot: fd.get("_h") as string,
     });
     if (result.success) {
@@ -27,6 +36,7 @@ export function ContactForm() {
     } else {
       setStatus("error");
       setErrorMsg(result.error ?? "Something went wrong. Please try again.");
+      setShowFallback(Boolean(result.showFallback));
     }
   }
 
@@ -93,16 +103,7 @@ export function ContactForm() {
       </Field>
 
       {status === "error" && (
-        <p
-          className="text-sm p-3 rounded-btn"
-          style={{
-            background: "color-mix(in srgb, var(--c-brand) 14%, transparent)",
-            color: "var(--c-brand)",
-          }}
-          role="alert"
-        >
-          {errorMsg}
-        </p>
+        <FormErrorNotice message={errorMsg} showFallback={showFallback} />
       )}
 
       <button
