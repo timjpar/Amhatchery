@@ -60,19 +60,28 @@ succeeds.
 **Activation is scoped to recipient + origin.** The first submission from a new
 origin makes FormSubmit email `amrabbitstn@gmail.com` a confirmation link;
 until someone clicks it, submissions from that origin are not delivered.
-amrabbits.com is already activated, but amhatchery.com needs its own. This is
-also why the form cannot be exercised from `localhost` — test it on the
-deployed site.
+Each origin activates separately: amrabbits.com is already activated, and
+firstfruitshatchery.com needs its own — the domain switch reset this, so the
+first submission from the new domain will sit undelivered until the
+confirmation link is clicked. This is also why the form cannot be exercised
+from `localhost` — test it on the deployed site.
 
 Spam handling is the hidden honeypot in the form plus FormSubmit's own
 filtering. There is deliberately no rate limiter: it could only run
 server-side, and the endpoint is reachable without going through this site at
 all.
 
-The domain is live: `amhatchery.com` is registered through Vercel and connected
-to the `amhatchery` project, with `www` 308-redirecting to the apex. `SITE_URL`
-in `app/_config/business.ts` is the real domain — sitemap, robots, canonical
-URLs, and JSON-LD all read from it.
+The domain is live: `firstfruitshatchery.com` is registered through Vercel and
+connected to the `amhatchery` project, with `www` 308-redirecting to the apex.
+`SITE_URL` in `app/_config/business.ts` is the real domain — sitemap, robots,
+canonical URLs, and JSON-LD all read from it.
+
+`amhatchery.com` was the original domain. Both it and its `www` now
+308-redirect to `firstfruitshatchery.com`, configured on the Vercel project's
+Domains tab rather than in `next.config.ts`, so the hop happens at the edge
+without invoking the app. Leave that domain registered and attached to the
+project — dropping it breaks every inbound link and search result pointing at
+the old address.
 
 Deposits already work — the PayPal hosted button in `app/_config/paypal.ts` is
 the same one the rabbitry uses, so payments land in the existing account. Swap

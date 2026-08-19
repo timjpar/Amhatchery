@@ -11,9 +11,14 @@ import { LINKS } from "@/app/_config/links";
  * the `amhatchery` project (`www` 308-redirects to the apex). It is the single
  * place to change the domain — sitemap, robots, canonical URLs, and JSON-LD all
  * read from it.
+ *
+ * The former domain amhatchery.com — apex and `www` — 308-redirects here at the
+ * Vercel domain level, so no code in this repo handles that hop. Keep it
+ * registered and pointed at this project: it carries the site's existing
+ * inbound links and search results.
  */
 
-export const SITE_URL = "https://amhatchery.com";
+export const SITE_URL = "https://firstfruitshatchery.com";
 
 export const BUSINESS = {
   name: "AM Hatchery",
