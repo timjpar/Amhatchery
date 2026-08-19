@@ -58,7 +58,9 @@ export function Button({
       ? {
           background: "transparent",
           border: "1.5px solid var(--c-brand)",
-          color: "var(--c-brand)",
+          /* Border carries the brand color; the label uses the darker
+             text-weight variant so it stays legible at button sizes. */
+          color: "var(--c-link)",
         }
       : { background: "transparent", color: "var(--c-link)" };
 

@@ -2,12 +2,39 @@
 
 /* ============================================================
    THEME VARIABLES
-   Two themes: "eggshell" (light, cream almanac paper) and
+   Three themes, cycled by the toggle in the nav rail:
+   "marans" (default — cream paper, terracotta ink, sage bands,
+   named for the terracotta-brown egg a Black Copper Marans lays),
+   "eggshell" (light, warmer almanac paper with a green rail), and
    "brooder" (dark, heat-lamp glow). The flash-prevention script
    in layout.tsx sets data-theme before React hydrates.
+
+   Adding or renaming a theme means touching four places: this file,
+   app/_types/index.ts, the THEMES list in ThemeProvider.tsx, and the
+   inline script + <html data-theme> in layout.tsx.
    ============================================================ */
 
+/* Terracotta on cream, with sage section bands — three colors doing
+   all the work, the way a hand-set seed catalog would. */
 :root,
+[data-theme="marans"] {
+  --c-page: #fdf7ed;
+  --c-panel: #f3f0e4;
+  --c-brand: #d55042;
+  --c-brand-fg: #fdf7ed;
+  --c-accent: #ccd6c0;
+  --c-accent-fg: #6b2a20;
+  --c-link: #b8402f;
+  --c-ink: #46362f;
+  --c-ink-2: #7a6258;
+  --c-title: #b23a2e;
+  --c-rail: #732d20;
+  --c-rail-fg: #fbf2e4;
+  --c-line: #e8d6c7;
+  --c-input-bg: #fffdf6;
+  --c-grain: 0.045;
+}
+
 [data-theme="eggshell"] {
   --c-page: #faf5ea;
   --c-panel: #f1e7d3;

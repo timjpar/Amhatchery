@@ -17,7 +17,7 @@ export function Badge({ children, variant = "brand" }: BadgeProps) {
     },
     "soft-brand": {
       background: "color-mix(in srgb, var(--c-brand) 16%, var(--c-page))",
-      color: "var(--c-brand)",
+      color: "var(--c-link)",
     },
     "soft-accent": {
       background: "color-mix(in srgb, var(--c-accent) 26%, var(--c-page))",

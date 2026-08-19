@@ -57,14 +57,26 @@ HTTP 403 to requests originating from cloud infrastructure, so a POST from a
 Vercel function fails in production while the identical call from a laptop
 succeeds.
 
-**Activation is scoped to recipient + origin.** The first submission from a new
-origin makes FormSubmit email `amrabbitstn@gmail.com` a confirmation link;
-until someone clicks it, submissions from that origin are not delivered.
-Each origin activates separately: amrabbits.com is already activated, and
-firstfruitshatchery.com needs its own — the domain switch reset this, so the
-first submission from the new domain will sit undelivered until the
-confirmation link is clicked. This is also why the form cannot be exercised
-from `localhost` — test it on the deployed site.
+**Activation is scoped to recipient + origin.** amrabbits.com was activated
+long ago, and firstfruitshatchery.com needed its own after the domain move —
+changing the domain resets this. Until an origin is activated, FormSubmit
+answers `{"success":"false"}` with a "This form needs Activation" message — so
+submissions are *rejected*, not queued, and the visitor correctly sees the
+failure notice with the phone and email fallback rather than a false
+"Message sent".
+
+To activate a new origin, submit once from it, then click the "Activate Form"
+link FormSubmit emails to `LINKS.email`. The submission doesn't have to come
+from the deployed site — any non-cloud machine works if you set the `Origin`
+header, which is faster than deploying to test:
+
+```bash
+curl -s -X POST "https://formsubmit.co/ajax/amrabbitstn%40gmail.com" -H "Content-Type: application/json" -H "Origin: https://firstfruitshatchery.com" -d '{"Name":"test","Message":"test","_captcha":"false"}'
+```
+
+It must not come from cloud infrastructure, though — FormSubmit answers 403 to
+those, which is the same reason the form posts from the browser rather than a
+Vercel function.
 
 Spam handling is the hidden honeypot in the form plus FormSubmit's own
 filtering. There is deliberately no rate limiter: it could only run
@@ -105,11 +117,18 @@ the old photo for up to a month.
 
 ## Theming
 
-Two themes, both defined as CSS custom properties in `app/globals.css`:
-`eggshell` (light, cream paper) and `brooder` (dark, heat-lamp). The inline
-script in `app/layout.tsx` stamps `data-theme` on `<html>` before React hydrates
-so there's no flash; `ThemeProvider` reads the stored value with
-`useSyncExternalStore`. Colors are referenced as `var(--c-*)`, never hardcoded.
+Three themes, all defined as CSS custom properties in `app/globals.css`:
+`marans` (the default — cream paper, terracotta ink, sage bands), `eggshell`
+(warmer paper, green rail), and `brooder` (dark, heat-lamp). The toggle in the
+nav rail cycles them in that order. The inline script in `app/layout.tsx` stamps
+`data-theme` on `<html>` before React hydrates so there's no flash;
+`ThemeProvider` reads the stored value with `useSyncExternalStore`. Colors are
+referenced as `var(--c-*)`, never hardcoded.
+
+Adding, removing, or renaming a theme means editing four places, which the
+comment at the top of `globals.css` also lists: the CSS block, `ThemeName` in
+`app/_types/index.ts`, the `THEMES` array in `ThemeProvider.tsx`, and both the
+`data-theme` attribute and the inline script's `allowed` list in `layout.tsx`.
 
 ## Redirects
 

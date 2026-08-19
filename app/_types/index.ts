@@ -1,10 +1,12 @@
-export type ThemeName = "eggshell" | "brooder";
+export type ThemeName = "marans" | "eggshell" | "brooder";
 
+/** One entry in the THEMES cycle list in ThemeProvider. */
 export interface ThemeOption {
   id: ThemeName;
+  /** Shown on the toggle button, uppercased by .label-mono. */
   label: string;
-  swatch: string;
-  swatchAlt: string;
+  /** One line for the button's tooltip and accessible name. */
+  hint: string;
 }
 
 export type Availability = "available" | "seasonal" | "coming-soon";

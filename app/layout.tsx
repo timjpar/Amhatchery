@@ -74,14 +74,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning data-theme="eggshell" className={fontVars}>
+    <html lang="en" suppressHydrationWarning data-theme="marans" className={fontVars}>
       <head>
         {/* Flash-prevention: reads localStorage before React hydrates, and
             validates against the current theme list so a stale value falls
             back to the default cleanly. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var allowed=['eggshell','brooder'];var t=localStorage.getItem('amh-theme');if(!t||allowed.indexOf(t)===-1){t='eggshell';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+            __html: `(function(){try{var allowed=['marans','eggshell','brooder'];var t=localStorage.getItem('amh-theme');if(!t||allowed.indexOf(t)===-1){t='marans';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
           }}
         />
       </head>

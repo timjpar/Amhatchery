@@ -1,11 +1,35 @@
 "use client";
 
 import { createContext, useCallback, useContext, useSyncExternalStore } from "react";
-import type { ThemeName } from "@/app/_types";
+import type { ThemeName, ThemeOption } from "@/app/_types";
 
 const STORAGE_KEY = "amh-theme";
-const DEFAULT_THEME: ThemeName = "eggshell";
-const ALLOWED_THEMES: ThemeName[] = ["eggshell", "brooder"];
+
+/**
+ * The themes, in the order the nav toggle cycles them. The first entry is the
+ * default — it must match the `:root` block in globals.css, the `data-theme`
+ * attribute on <html>, and the inline flash-prevention script in layout.tsx.
+ */
+export const THEMES: ThemeOption[] = [
+  {
+    id: "marans",
+    label: "Marans",
+    hint: "Cream paper, terracotta ink, sage bands",
+  },
+  {
+    id: "eggshell",
+    label: "Eggshell",
+    hint: "Warm almanac paper, green rail",
+  },
+  {
+    id: "brooder",
+    label: "Brooder",
+    hint: "Dark, heat-lamp glow",
+  },
+];
+
+const DEFAULT_THEME: ThemeName = THEMES[0].id;
+const ALLOWED_THEMES: ThemeName[] = THEMES.map((t) => t.id);
 
 /**
  * The chosen theme lives in localStorage, not in React state — the inline
@@ -54,16 +78,22 @@ function writeTheme(next: ThemeName) {
   listeners.forEach((l) => l());
 }
 
+/** The theme after `theme` in the cycle, wrapping back to the first. */
+export function nextTheme(theme: ThemeName): ThemeOption {
+  const i = THEMES.findIndex((t) => t.id === theme);
+  return THEMES[(i + 1) % THEMES.length];
+}
+
 interface ThemeContextValue {
   theme: ThemeName;
   setTheme: (theme: ThemeName) => void;
-  toggleTheme: () => void;
+  cycleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
   theme: DEFAULT_THEME,
   setTheme: () => {},
-  toggleTheme: () => {},
+  cycleTheme: () => {},
 });
 
 export function useTheme() {
@@ -75,12 +105,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = useCallback((next: ThemeName) => writeTheme(next), []);
 
-  const toggleTheme = useCallback(() => {
-    writeTheme(getSnapshot() === "eggshell" ? "brooder" : "eggshell");
+  // Reads the stored value rather than closing over `theme`, so rapid clicks
+  // always step from what is actually on <html>.
+  const cycleTheme = useCallback(() => {
+    writeTheme(nextTheme(getSnapshot()).id);
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, cycleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
