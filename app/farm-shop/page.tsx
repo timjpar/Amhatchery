@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 const offerings = [
   {
     name: "Farm Fresh Eggs",
-    image: "/images/farm/silver-laced-wyandotte-hen-pasture.jpeg",
-    alt: "Silver Laced Wyandotte laying hen foraging on pasture",
+    image: "/images/flock/rhode-island-red-chickens-pasture.jpeg",
+    alt: "Pasture-raised laying hens foraging on grass",
     description:
       "From the same pasture-raised hens whose eggs go in our incubators — gathered daily, with yolks the colour of a good afternoon.",
   },

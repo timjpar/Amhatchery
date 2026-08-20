@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/chickens" },
   title: "Chickens & Chicks for Sale in East Tennessee",
   description:
-    "Barred Rock, Rhode Island Red, Silver Laced Wyandotte, and Ameraucana / Easter Egger blue egg layers from AM Hatchery in Newport, TN. Chicks from $5, grown birds $30–$50, hatching eggs from $10 a dozen.",
+    "Barred Rock, Rhode Island Red, and Ameraucana / Easter Egger blue egg layers from AM Hatchery in Newport, TN. Chicks from $5, grown birds $30–$50, hatching eggs from $10 a dozen.",
 };
 
 const hatching = chickens.filter((b) => b.availability === "available");
@@ -26,7 +26,7 @@ export default function ChickensPage() {
       <PageHero
         eyebrow="What we hatch · 02"
         title="Chickens & chicks"
-        subtitle="Four laying breeds we keep year-round, hatched in small batches and sold straight run. Grown, sexed birds are available too when we have them."
+        subtitle="Three laying breeds we keep year-round, hatched in small batches and sold straight run. Grown, sexed birds are available too when we have them."
         image="/images/flock/homestead-mixed-chicken-flock-pasture.jpeg"
         imagePosition="center 55%"
         facts={[
@@ -43,16 +43,16 @@ export default function ChickensPage() {
           <SectionHeader
             eyebrow="Hatching now"
             title="The breeds we keep"
-            subtitle="All four are dual-purpose, cold-hardy enough for a Tennessee winter, and calm enough to mix in one flock."
+            subtitle="All three are dual-purpose, cold-hardy enough for a Tennessee winter, and calm enough to mix in one flock."
             align="left"
             className="mb-12"
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {hatching.map((bird) => (
               <BirdCard
                 key={bird.id}
                 bird={bird}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             ))}
           </div>

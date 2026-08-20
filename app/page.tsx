@@ -16,7 +16,7 @@ export const metadata: Metadata = {
       "Hatching Eggs, Chicks, Ducklings & Quail in East Tennessee | AM Hatchery",
   },
   description:
-    "AM Hatchery in Newport, TN sells fertile hatching eggs, day-old chicks, ducklings, and Coturnix quail — Barred Rock, Rhode Island Red, Wyandotte, and blue-egg-laying Ameraucanas. Local pickup across East Tennessee.",
+    "AM Hatchery in Newport, TN sells fertile hatching eggs, day-old chicks, ducklings, and Coturnix quail — Barred Rock, Rhode Island Red, and blue-egg-laying Ameraucanas. Local pickup across East Tennessee.",
 };
 
 const lineup = [
@@ -36,7 +36,7 @@ const lineup = [
     title: "Chickens & Chicks",
     price: `Chicks ${PRICING.chickChick} · Grown ${PRICING.chickGrown}`,
     blurb:
-      "Barred Rock, Rhode Island Red, Silver Laced Wyandotte, and blue-egg-laying Ameraucanas and Easter Eggers.",
+      "Barred Rock, Rhode Island Red, and blue-egg-laying Ameraucanas and Easter Eggers.",
     image: "/images/farm/free-range-chicken-flock-newport-tn.jpeg",
     alt: "Free-range mixed chicken flock foraging on grass in Newport, Tennessee",
   },
@@ -332,12 +332,12 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="In the coop right now"
             title="Breeds hatching this season"
-            subtitle="Four laying breeds we keep year-round, including the blue and green egg layers everybody asks for. More heritage lines are on the way."
+            subtitle="Three laying breeds we keep year-round, including the blue and green egg layers everybody asks for. More heritage lines are on the way."
             className="mb-14"
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featured.map((bird) => (
-              <BirdCard key={bird.id} bird={bird} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <BirdCard key={bird.id} bird={bird} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
             ))}
           </div>
           <div className="mt-12 text-center">

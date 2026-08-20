@@ -20,7 +20,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Ask us anything"
         subtitle="Texting is genuinely the fastest way to reach us — we're usually outside. Visits are by appointment so somebody's here to meet you."
-        image="/images/farm/silver-laced-wyandotte-hen-pasture.jpeg"
+        image="/images/flock/barred-rock-chickens-pasture-coop.jpeg"
         imagePosition="center 55%"
       />
 

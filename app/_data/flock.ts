@@ -45,19 +45,6 @@ export const chickens: Bird[] = [
       "One of the most productive brown-egg layers there is. Tough, adaptable, and calm — a homestead staple that keeps laying through heat, cold, and short winter days.",
   },
   {
-    id: "silver-laced-wyandotte",
-    name: "Silver Laced Wyandotte",
-    availability: "available",
-    eggNote: "Light brown eggs, ~4 a week",
-    chickPrice: PRICING.chickChick,
-    grownPrice: PRICING.chickGrown,
-    hatchingEggPrice: "$10/dz",
-    image: "/images/farm/silver-laced-wyandotte-hen-pasture.jpeg",
-    imageAlt: "Silver Laced Wyandotte hen with black-and-white laced feathers",
-    description:
-      "A stunning ornamental dual-purpose bird — silver feathers edged in black lacing, a rose comb that shrugs off frost, and a docile temperament that makes them easy to keep.",
-  },
-  {
     id: "ameraucana-easter-egger",
     name: "Ameraucana & Easter Eggers",
     alsoKnownAs: ["Americana", "Olive Egger", "Blue egg layers"],
