@@ -34,7 +34,7 @@ export const BUSINESS = {
   telephone: "+1-423-540-6566",
   contactName: "Michael",
   founders: ["Michael Parsons", "Ali Parsons"],
-  /** Chicks from $5, hatching eggs from $10, grown birds to $50. */
+  /** Chicks from $5, hatching eggs from $10, grown birds to $40. */
   priceRange: "$",
   /** Home-based hatchery — no public street address. City-level only. */
   address: {

@@ -25,7 +25,7 @@ export const LINKS = {
     ducks: {
       key: "ducks",
       title: "Ducks & Ducklings",
-      url: "https://www.flickr.com/photos/204629165@N05/sets/72177720334623770/",
+      url: "https://www.flickr.com/photos/204629165@N05/sets/72177720336318657/",
     },
     quail: {
       key: "quail",

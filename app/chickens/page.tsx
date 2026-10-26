@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/chickens" },
   title: "Chickens & Chicks for Sale in East Tennessee",
   description:
-    "Barred Rock, Rhode Island Red, and Ameraucana / Easter Egger blue egg layers from AM Hatchery in Newport, TN. Chicks from $5, grown birds $30–$50, hatching eggs from $10 a dozen.",
+    "Barred Rock, Rhode Island Red, and Ameraucana / Easter Egger blue egg layers from AM Hatchery in Newport, TN. Chicks from $5, grown birds $20–$30, hatching eggs from $10 a dozen.",
 };
 
 const hatching = chickens.filter((b) => b.availability === "available");

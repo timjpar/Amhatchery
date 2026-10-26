@@ -8,9 +8,9 @@ import type { Bird, EggType } from "@/app/_types";
 
 export const PRICING = {
   chickChick: "$5",
-  chickGrown: "$30–$50",
+  chickGrown: "$20–$30",
   duckling: "$5",
-  duckGrown: "$30–$50",
+  duckGrown: "$20–$40",
   quailChick: "$5",
   quailGrown: "$15",
   hatchingEggsFrom: "$10",
