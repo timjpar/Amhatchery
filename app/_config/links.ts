@@ -30,7 +30,7 @@ export const LINKS = {
     quail: {
       key: "quail",
       title: "Quail",
-      url: "https://www.flickr.com/photos/204629165@N05/sets/72177720334651269/",
+      url: "https://www.flickr.com/photos/204629165@N05/sets/72177720336374486/",
     },
   },
 } as const;
